@@ -3,7 +3,6 @@ module github.com/cnbailian/example-logs
 go 1.18
 
 require (
-	github.com/cnbailian/example v0.0.0
 	github.com/cnbailian/heimdallr v0.0.0
 )
 
@@ -13,6 +12,5 @@ require (
 )
 
 replace (
-	github.com/cnbailian/example => ../example/
 	github.com/cnbailian/heimdallr => ../../
 )

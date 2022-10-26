@@ -20,14 +20,14 @@ import (
 	"fmt"
 	"log"
 
-	"github.com/cnbailian/example/pkg/str"
 	"github.com/cnbailian/heimdallr"
+	"github.com/cnbailian/heimdallr/utils"
 )
 
 func main() {
-	heimdallr.SetExecutable("../example/example")
-	uprobeErrors := heimdallr.Uprobe(str.IntToStr, func() {
-		log.Println("call Uprobe func")
+	heimdallr.SetExecutable("../args/args")
+	uprobeErrors := heimdallr.Uprobe(utils.Pppppppppppp, func(x string, y string, t string, c string, o int, q int, w int, r string) {
+		log.Printf("call Uprobe func: arg1: %v, arg2: %v, arg3: %v, arg4: %v, arg5: %v, arg6: %v, arg7: %v, arg8: %v", x, y, t, c, o, q, w, r)
 	})
 	go func() {
 		for err := range uprobeErrors {
@@ -35,8 +35,9 @@ func main() {
 		}
 	}()
 
-	uretprobeErrors := heimdallr.Uretprobe(str.IntToStr, func() {
-		log.Println("call Uretprobe func")
+	// Uretprobe 如何正确获得函数参数？后者 Uretprobe 不应该进行传参？
+	uretprobeErrors := heimdallr.Uretprobe(utils.Pppppppppppp, func(x string, y string, t string, c string, o int, q int, w int, r string) {
+		log.Printf("call Uretprobe func: arg1: %v, arg2: %v, arg3: %v, arg4: %v, arg5: %v, arg6: %v, arg7: %v, arg8: %v", x, y, t, c, o, q, w, r)
 	})
 	go func() {
 		for err := range uretprobeErrors {
